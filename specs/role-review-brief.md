@@ -28,3 +28,7 @@ The expected outcome is not "build a full engine." The expected outcome is a
 small, reviewable COURT contract increment that RACKET can consume while product
 repos keep rules and scene direction.
 
+## Review records
+
+- `role-reviews\qualifying-draw-2026-05-18.md`
+
