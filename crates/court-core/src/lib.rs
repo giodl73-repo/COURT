@@ -92,12 +92,21 @@ impl CourtActionAvailability {
 pub struct CourtSceneNode {
     pub id: String,
     pub label: String,
+    pub player_read_label: String,
+    pub product_meaning: String,
     pub role: CourtSceneRole,
     pub x: i32,
     pub y: i32,
     pub width: i32,
     pub height: i32,
     pub provenance: Option<CourtProvenance>,
+    pub unsupported_features: Vec<CourtUnsupportedFeatureHint>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CourtUnsupportedFeatureHint {
+    pub feature: String,
+    pub fallback: String,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -108,14 +117,26 @@ pub enum CourtSceneRole {
     Prop,
     Hud,
     Text,
+    Media,
+    Control,
+    Boundary,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CourtSnapshot {
+    pub metadata: CourtSnapshotMetadata,
     pub experience: CourtExperience,
     pub state_label: String,
     pub actions: Vec<CourtAction>,
     pub scene: Vec<CourtSceneNode>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CourtSnapshotMetadata {
+    pub experience_id: String,
+    pub experience_version: String,
+    pub surface: CourtSurfaceKind,
+    pub scene_contract_version: String,
 }
 
 impl CourtSnapshot {
@@ -128,6 +149,12 @@ impl CourtSnapshot {
 
     pub fn has_scene_role(&self, role: CourtSceneRole) -> bool {
         self.scene.iter().any(|node| node.role == role)
+    }
+
+    pub fn unsupported_scene_features(&self) -> impl Iterator<Item = &CourtUnsupportedFeatureHint> {
+        self.scene
+            .iter()
+            .flat_map(|node| node.unsupported_features.iter())
     }
 }
 
@@ -149,6 +176,12 @@ mod tests {
     #[test]
     fn snapshot_exposes_actions_and_scene_roles() {
         let snapshot = CourtSnapshot {
+            metadata: CourtSnapshotMetadata {
+                experience_id: "demo".to_string(),
+                experience_version: "0.1.0".to_string(),
+                surface: CourtSurfaceKind::Native2d,
+                scene_contract_version: "court.scene.v1".to_string(),
+            },
             experience: CourtExperience {
                 id: "demo".to_string(),
                 title: "Demo".to_string(),
@@ -189,12 +222,18 @@ mod tests {
             scene: vec![CourtSceneNode {
                 id: "court".to_string(),
                 label: "Court surface".to_string(),
+                player_read_label: "A playable court surface".to_string(),
+                product_meaning: "The neutral play area for framework validation.".to_string(),
                 role: CourtSceneRole::Surface,
                 x: 0,
                 y: 0,
                 width: 12,
                 height: 8,
                 provenance: Some(CourtProvenance::product_authored("court:demo:surface")),
+                unsupported_features: vec![CourtUnsupportedFeatureHint {
+                    feature: "surface-texture".to_string(),
+                    fallback: "Use flat court color.".to_string(),
+                }],
             }],
         };
 
@@ -210,6 +249,17 @@ mod tests {
             snapshot.experience.provenance.class,
             CourtProvenanceClass::ProductAuthored
         );
+        assert_eq!(snapshot.metadata.experience_id, snapshot.experience.id);
+        assert_eq!(snapshot.metadata.scene_contract_version, "court.scene.v1");
+        assert_eq!(
+            snapshot.scene[0].player_read_label,
+            "A playable court surface"
+        );
+        assert_eq!(
+            snapshot.scene[0].product_meaning,
+            "The neutral play area for framework validation."
+        );
+        assert_eq!(snapshot.unsupported_scene_features().count(), 1);
         assert!(snapshot.has_scene_role(CourtSceneRole::Surface));
         assert!(!snapshot.has_scene_role(CourtSceneRole::Actor));
     }

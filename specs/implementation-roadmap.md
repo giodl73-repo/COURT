@@ -59,6 +59,8 @@ Exit gate:
 
 Goal: harden snapshot/state handoff and scene/UX intent.
 
+Status: complete for the first snapshot/scene intent hardening slice.
+
 COURT layers:
 
 - snapshot/state handoff,

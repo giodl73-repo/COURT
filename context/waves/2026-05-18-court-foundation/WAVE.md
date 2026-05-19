@@ -19,8 +19,9 @@ owning product rules or engine rendering.
 | 02 | FONTES research review | complete | Read the local MIT game-course corpus and wrote COURT research/spec/role review packet. |
 | 03 | Qualifying Draw role review | complete | Recorded role-by-role decisions for the first implementation gate. |
 | 04 | Australian Open | complete | Implemented experience intent, provenance, and action availability contract shape. |
-| 05 | RACKET handoff | pending | Prove a separate engine can consume the reviewed COURT contracts. |
-| 06 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
+| 05 | Roland-Garros | complete | Hardened snapshot metadata and scene/UX intent fields. |
+| 06 | RACKET handoff | pending | Prove a separate engine can consume the reviewed COURT contracts. |
+| 07 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
 
 ## Success criteria
 
@@ -32,6 +33,8 @@ owning product rules or engine rendering.
 - Qualifying Draw role review records the approved Australian Open code slice.
 - Australian Open code adds identity, provenance, and action-availability
   contract fields without product policy.
+- Roland-Garros code adds snapshot metadata and scene/UX intent fields without
+  changing MUDDLE runtime behavior.
 - `cargo test --quiet` passes.
 
 ## Validation
