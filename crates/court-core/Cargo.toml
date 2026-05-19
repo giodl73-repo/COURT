@@ -1,0 +1,9 @@
+[package]
+name = "court-core"
+version = "0.1.0"
+edition = "2021"
+description = "Product-neutral scalable experience framework contracts."
+license = "MIT"
+
+[dependencies]
+
