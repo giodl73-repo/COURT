@@ -20,7 +20,7 @@ owning product rules or engine rendering.
 | 03 | Qualifying Draw role review | complete | Recorded role-by-role decisions for the first implementation gate. |
 | 04 | Australian Open | complete | Implemented experience intent, provenance, and action availability contract shape. |
 | 05 | Roland-Garros | complete | Hardened snapshot metadata and scene/UX intent fields. |
-| 06 | RACKET handoff | pending | Prove a separate engine can consume the reviewed COURT contracts. |
+| 06 | Wimbledon | complete | RACKET now reports COURT adapter compatibility diagnostics without owning product rules. |
 | 07 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
 
 ## Success criteria
@@ -35,6 +35,8 @@ owning product rules or engine rendering.
   contract fields without product policy.
 - Roland-Garros code adds snapshot metadata and scene/UX intent fields without
   changing MUDDLE runtime behavior.
+- Wimbledon proves RACKET can consume reviewed COURT contracts and report
+  unsupported features explicitly.
 - `cargo test --quiet` passes.
 
 ## Validation

@@ -91,6 +91,8 @@ Exit gate:
 
 Goal: prove the engine-adapter contract through RACKET.
 
+Status: complete for the first RACKET adapter compatibility diagnostics slice.
+
 COURT layers:
 
 - engine adapter contract,
