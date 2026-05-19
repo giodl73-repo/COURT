@@ -25,7 +25,11 @@ owning product rules or engine rendering.
 | 08 | Davis Cup | complete | AMAZE Prism Vault now has a COURT adoption fixture beside its MUDDLE host. |
 | 09 | Laver Cup | complete | Recorded cross-surface migration decisions for COURT, MUDDLE, RALLY, RACKET, and AMAZE. |
 | 10 | Post-Laver role review | complete | Reviewed current COURT/RACKET/AMAZE foundation with all COURT roles. |
-| 11 | MUDDLE mapping | pending | Map broader MUDDLE snapshot lessons into COURT terminology without forcing migration. |
+| 11 | RACKET product smoke | complete | AMAZE Prism Vault runs through RACKET's deterministic windowless runtime loop. |
+| 12 | Second product fixture | complete | TIGRIS Parliament proves a non-escape-room table surface through COURT/RACKET. |
+| 13 | Evidence references | complete | COURT packets link product-owned MUDDLE/RALLY/portfolio evidence without copying artifact bodies. |
+| 14 | Foundation closeout | complete | Recorded the pause point, boundaries, deferred work, and dormant next options. |
+| 15 | MUDDLE mapping | deferred | Map broader MUDDLE snapshot lessons only when a product or migration proposal needs it. |
 
 ## Success criteria
 
@@ -49,6 +53,9 @@ owning product rules or engine rendering.
   MUDDLE/RALLY before direct product dependency expands.
 - Post-Laver role review approves the current foundation and names next options
   without authorizing migration.
+- Follow-up fixture work proves RACKET runtime smoke over AMAZE, a second
+  non-escape-room TIGRIS fixture, and explicit product-owned evidence references.
+- Foundation closeout names what remains deferred before the wave pauses.
 - `cargo test --quiet` passes.
 
 ## Validation

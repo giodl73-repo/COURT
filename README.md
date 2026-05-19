@@ -34,7 +34,16 @@ cargo test --quiet
   owning product rules.
 - `specs\playtest-validation-contract.md` defines playtest, critique, and
   assessment evidence.
+- `specs\role-reviews\foundation-closeout-2026-05-18.md` records the current
+  pause point: COURT contracts, RACKET diagnostics/runtime smokes, AMAZE/TIGRIS
+  fixtures, evidence references, and deferred migration work.
 - `.roles\` defines the COURT review roles.
+
+## Current stop point
+
+The foundation wave is wrapped. COURT is ready for additional product fixtures
+or evidence references, but not for absorbing MUDDLE clients, RALLY reports, or
+product rules.
 
 ## Non-goals
 
