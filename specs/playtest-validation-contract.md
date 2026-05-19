@@ -13,6 +13,7 @@ COURT should eventually represent these records as product-neutral data:
 | Record | Required fields |
 |---|---|
 | Prototype revision | Experience id, revision id, design thesis, changed areas, non-goals. |
+| Evidence reference | Owner repo, artifact reference, evidence kind, summary. |
 | Playtest session | Session id, audience, build/revision, script, observed blockers, completion outcome. |
 | Critique finding | Reviewer role, finding id, source scene/action, severity, recommendation. |
 | Focus-test finding | Test prompt, player action, observed comprehension, follow-up change. |
@@ -31,6 +32,9 @@ The first validation path should stay lightweight:
 ## Required boundaries
 
 - COURT may store evidence shape and references.
+- COURT evidence references point to product-owned tests, playtest scripts,
+  RALLY validation reports, persona harnesses, or external reports; COURT does
+  not copy those artifact bodies.
 - Product repos own player-study details, game-specific scripts, and final
   interpretation.
 - FONTES-owned source records can inform design methods, but COURT must not copy

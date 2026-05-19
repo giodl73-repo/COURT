@@ -173,6 +173,7 @@ pub enum CourtHostError {
 pub struct CourtValidationPacket {
     pub experience_id: String,
     pub prototype_revisions: Vec<CourtPrototypeRevision>,
+    pub evidence_references: Vec<CourtEvidenceReference>,
     pub playtest_sessions: Vec<CourtPlaytestSession>,
     pub critique_findings: Vec<CourtCritiqueFinding>,
     pub focus_test_findings: Vec<CourtFocusTestFinding>,
@@ -190,6 +191,29 @@ impl CourtValidationPacket {
     pub fn finding_count(&self) -> usize {
         self.critique_findings.len() + self.focus_test_findings.len()
     }
+
+    pub fn has_evidence_reference(&self, owner_repo: &str, artifact_ref: &str) -> bool {
+        self.evidence_references.iter().any(|reference| {
+            reference.owner_repo == owner_repo && reference.artifact_ref == artifact_ref
+        })
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CourtEvidenceReference {
+    pub owner_repo: String,
+    pub artifact_ref: String,
+    pub evidence_kind: CourtEvidenceKind,
+    pub summary: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CourtEvidenceKind {
+    ProductPlaytest,
+    MuddlePathTest,
+    RallyValidation,
+    PersonaHarness,
+    ExternalReport,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -401,6 +425,14 @@ mod tests {
                 changed_areas: vec!["opening-action-copy".to_string()],
                 non_goals: vec!["No renderer migration.".to_string()],
             }],
+            evidence_references: vec![CourtEvidenceReference {
+                owner_repo: "PRODUCT".to_string(),
+                artifact_ref: "tests::opening_path".to_string(),
+                evidence_kind: CourtEvidenceKind::MuddlePathTest,
+                summary:
+                    "Product-owned test proves the first-move path without storing transcript details in COURT."
+                        .to_string(),
+            }],
             playtest_sessions: vec![CourtPlaytestSession {
                 session_id: "playtest-001".to_string(),
                 audience: "first-time players".to_string(),
@@ -442,5 +474,6 @@ mod tests {
             packet.playtest_sessions[0].script_ref,
             "product-owned-script-001"
         );
+        assert!(packet.has_evidence_reference("PRODUCT", "tests::opening_path"));
     }
 }
