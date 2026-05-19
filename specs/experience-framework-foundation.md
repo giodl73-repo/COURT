@@ -22,6 +22,19 @@ must stay framework-first:
 
 ## Required contract areas
 
+The foundation is intentionally layered so COURT does not absorb all of MUDDLE or
+RALLY at once.
+
+| Layer | COURT responsibility | Existing source of lessons | Boundary rule |
+|---|---|---|---|
+| 1. Experience identity | Stable ids, owner, audience, design thesis, non-goals, and custody summary. | TRACKER repo-intake and product plans. | Product repos still own fantasy, content, and game-specific goals. |
+| 2. Action and rule affordances | Portable action labels, payloads, availability states, guidance, recoverability, and feedback expectations. | MUDDLE commands and RALLY action/phase/action-budget primitives. | COURT describes action affordance shape; product repos decide legality and RALLY may execute deterministic policy. |
+| 3. Snapshot/state handoff | Portable snapshot envelope for engines, tests, and review tools. | `MuddleClientSnapshot` and product checkpoint hosts. | COURT does not own product state internals or persistence storage. |
+| 4. Scene and UX intent | Scene node roles, player-read labels, placement intent, product meaning, and provenance labels. | MUDDLE visual nodes, local window `/state`, and Macroquad visual-smoke work. | COURT describes intent; RACKET/MUDDLE/browser clients decide rendering implementation. |
+| 5. Iteration and playtest evidence | Prototype revisions, playtest sessions, critique findings, focus-test records, and postmortem hooks. | RALLY validation reports plus repo-local persona/playtest notes. | COURT stores evidence shape and references; product repos own scripts, player details, and conclusions. |
+| 6. Assessment hooks | Learning, impact, simulation, comprehension, field-test, and success/failure evidence targets. | FONTES MIT educational/social-change game-course corpus. | Claims remain optional unless the product declares educational, simulation, or social-impact intent. |
+| 7. Engine adapter contract | Required adapter inputs, unsupported-feature reporting, deterministic smoke checks, and rule-free rendering/runtime handoff. | MUDDLE Macroquad engine client and RACKET frame-plan proof. | Engines consume COURT; they do not infer or own product rules. |
+
 ### 1. Experience identity
 
 Every experience needs:
@@ -123,6 +136,27 @@ Next deltas should add:
    comprehension targets.
 5. RACKET compatibility checks that fail when required scene/action roles are
    unsupported.
+
+## Relationship to MUDDLE and RALLY
+
+COURT overlaps intentionally with MUDDLE and RALLY, but only at the contract
+seams:
+
+- MUDDLE remains the working room-command UX, transcript/session/checkpoint
+  surface, browser client, and Macroquad prototype engine client.
+- RALLY remains the deterministic run, seeded simulation, tabletop primitive,
+  metric, validation, comparison, and evidence-packet substrate.
+- COURT extracts the portable experience vocabulary that can sit above both:
+  action affordances, snapshot handoff, scene intent, reviewable design intent,
+  provenance, and playtest/assessment evidence references.
+
+The migration rule is no big-bang rewrite. A MUDDLE or RALLY capability moves
+under COURT only after:
+
+1. the capability is expressed as a product-neutral COURT contract,
+2. RACKET or another adapter consumes it without product-rule ownership,
+3. existing MUDDLE/RALLY behavior still passes its current validation, and
+4. at least one product repo benefits from the generalization.
 
 ## Acceptance criteria
 
