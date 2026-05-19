@@ -121,6 +121,8 @@ Exit gate:
 
 Goal: add playtest, critique, focus-test, postmortem, and assessment evidence.
 
+Status: complete for the first product-neutral validation evidence slice.
+
 COURT layers:
 
 - iteration and playtest evidence,

@@ -21,7 +21,8 @@ owning product rules or engine rendering.
 | 04 | Australian Open | complete | Implemented experience intent, provenance, and action availability contract shape. |
 | 05 | Roland-Garros | complete | Hardened snapshot metadata and scene/UX intent fields. |
 | 06 | Wimbledon | complete | RACKET now reports COURT adapter compatibility diagnostics without owning product rules. |
-| 07 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
+| 07 | US Open | complete | Added product-neutral playtest, critique, focus-test, assessment, and postmortem records. |
+| 08 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
 
 ## Success criteria
 
@@ -37,6 +38,8 @@ owning product rules or engine rendering.
   changing MUDDLE runtime behavior.
 - Wimbledon proves RACKET can consume reviewed COURT contracts and report
   unsupported features explicitly.
+- US Open adds validation evidence records without private player details or
+  product-owned scripts.
 - `cargo test --quiet` passes.
 
 ## Validation
