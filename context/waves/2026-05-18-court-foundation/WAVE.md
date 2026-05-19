@@ -22,7 +22,8 @@ owning product rules or engine rendering.
 | 05 | Roland-Garros | complete | Hardened snapshot metadata and scene/UX intent fields. |
 | 06 | Wimbledon | complete | RACKET now reports COURT adapter compatibility diagnostics without owning product rules. |
 | 07 | US Open | complete | Added product-neutral playtest, critique, focus-test, assessment, and postmortem records. |
-| 08 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
+| 08 | Davis Cup | complete | AMAZE Prism Vault now has a COURT adoption fixture beside its MUDDLE host. |
+| 09 | MUDDLE mapping | pending | Map broader MUDDLE snapshot lessons into COURT terminology without forcing migration. |
 
 ## Success criteria
 
@@ -40,6 +41,8 @@ owning product rules or engine rendering.
   unsupported features explicitly.
 - US Open adds validation evidence records without private player details or
   product-owned scripts.
+- Davis Cup proves one product slice can expose COURT and RACKET compatibility
+  without replacing the MUDDLE path.
 - `cargo test --quiet` passes.
 
 ## Validation

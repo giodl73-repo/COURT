@@ -152,6 +152,8 @@ Exit gate:
 
 Goal: prove product-team adoption without big-bang migration.
 
+Status: complete for the first AMAZE Prism Vault adoption fixture.
+
 COURT layers:
 
 - full experience contract slice,
