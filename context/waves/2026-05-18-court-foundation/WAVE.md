@@ -24,7 +24,8 @@ owning product rules or engine rendering.
 | 07 | US Open | complete | Added product-neutral playtest, critique, focus-test, assessment, and postmortem records. |
 | 08 | Davis Cup | complete | AMAZE Prism Vault now has a COURT adoption fixture beside its MUDDLE host. |
 | 09 | Laver Cup | complete | Recorded cross-surface migration decisions for COURT, MUDDLE, RALLY, RACKET, and AMAZE. |
-| 10 | MUDDLE mapping | pending | Map broader MUDDLE snapshot lessons into COURT terminology without forcing migration. |
+| 10 | Post-Laver role review | complete | Reviewed current COURT/RACKET/AMAZE foundation with all COURT roles. |
+| 11 | MUDDLE mapping | pending | Map broader MUDDLE snapshot lessons into COURT terminology without forcing migration. |
 
 ## Success criteria
 
@@ -46,6 +47,8 @@ owning product rules or engine rendering.
   without replacing the MUDDLE path.
 - Laver Cup records which capabilities graduate into COURT and which stay in
   MUDDLE/RALLY before direct product dependency expands.
+- Post-Laver role review approves the current foundation and names next options
+  without authorizing migration.
 - `cargo test --quiet` passes.
 
 ## Validation

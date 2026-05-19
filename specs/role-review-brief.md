@@ -31,4 +31,5 @@ repos keep rules and scene direction.
 ## Review records
 
 - `role-reviews\qualifying-draw-2026-05-18.md`
+- `role-reviews\post-laver-2026-05-18.md`
 
