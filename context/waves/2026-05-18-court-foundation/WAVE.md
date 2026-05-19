@@ -18,8 +18,9 @@ owning product rules or engine rendering.
 | 01 | Workspace foundation | complete | Created repo skeleton, docs, skills, and first tested contract. |
 | 02 | FONTES research review | complete | Read the local MIT game-course corpus and wrote COURT research/spec/role review packet. |
 | 03 | Qualifying Draw role review | complete | Recorded role-by-role decisions for the first implementation gate. |
-| 04 | RACKET handoff | pending | Prove a separate engine can consume the reviewed COURT contracts. |
-| 05 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
+| 04 | Australian Open | complete | Implemented experience intent, provenance, and action availability contract shape. |
+| 05 | RACKET handoff | pending | Prove a separate engine can consume the reviewed COURT contracts. |
+| 06 | MUDDLE mapping | pending | Map MUDDLE snapshot lessons into COURT terminology without forcing migration. |
 
 ## Success criteria
 
@@ -29,6 +30,8 @@ owning product rules or engine rendering.
 - Skills exist for future wave and pulse execution.
 - FONTES-grounded research and specs exist before further framework API growth.
 - Qualifying Draw role review records the approved Australian Open code slice.
+- Australian Open code adds identity, provenance, and action-availability
+  contract fields without product policy.
 - `cargo test --quiet` passes.
 
 ## Validation

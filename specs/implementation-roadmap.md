@@ -28,6 +28,8 @@ Exit gate:
 
 Goal: implement the portable identity and action layer.
 
+Status: complete for the first approved contract slice.
+
 COURT layers:
 
 - experience identity,
