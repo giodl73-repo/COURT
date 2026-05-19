@@ -8,6 +8,10 @@ experience boundary: state snapshots, actions, scene nodes, UX intent, replay,
 and validation surfaces that can be consumed by terminal, browser, native, or
 future authored-scene engines.
 
+The foundation design is grounded in the local FONTES MIT game-course corpus.
+See `docs\research\fontes-mit-game-courses.md` and the review specs in
+`specs\` before expanding `court-core`.
+
 ## First command
 
 ```powershell
@@ -20,6 +24,17 @@ cargo test --quiet
 - RACKET is the first real engine that runs COURT contracts.
 - MUDDLE remains the current room-command proof and learning source.
 - Product repos own product rules, fantasy, and scene direction.
+
+## Foundation review packet
+
+- `docs\research\fontes-mit-game-courses.md` records the local MIT game-course
+  evidence and rights boundaries.
+- `specs\experience-framework-foundation.md` defines the first contract areas.
+- `specs\engine-adapter-contract.md` defines what RACKET must prove without
+  owning product rules.
+- `specs\playtest-validation-contract.md` defines playtest, critique, and
+  assessment evidence.
+- `.roles\` defines the COURT review roles.
 
 ## Non-goals
 

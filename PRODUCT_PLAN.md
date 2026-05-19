@@ -23,12 +23,27 @@ through multiple engines or surfaces.
 
 ## First wave
 
-The foundation wave proves the smallest product-neutral core:
+The foundation wave proves the smallest product-neutral core and then freezes
+new API growth behind MIT-course-grounded review:
 
 1. Define `court-core` workspace and snapshot/action/scene primitives.
 2. Prove at least one testable host/snapshot contract.
 3. Scaffold repo-local wave and pulse process.
 4. Prepare RACKET as the first downstream engine consumer.
+5. Review the FONTES MIT game-course research packet before adding provenance,
+   playtest, assessment, or engine-adapter compatibility fields.
+
+## Review gate
+
+Before COURT expands past the current minimal contract, the role packet in
+`.roles\` must review:
+
+- source custody and rights boundaries,
+- action/rule affordances,
+- scene and UX intent,
+- playtest/critique evidence,
+- learning, impact, and simulation assessment hooks,
+- RACKET compatibility without product-rule ownership.
 
 ## Non-goals
 
