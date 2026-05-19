@@ -23,7 +23,8 @@ owning product rules or engine rendering.
 | 06 | Wimbledon | complete | RACKET now reports COURT adapter compatibility diagnostics without owning product rules. |
 | 07 | US Open | complete | Added product-neutral playtest, critique, focus-test, assessment, and postmortem records. |
 | 08 | Davis Cup | complete | AMAZE Prism Vault now has a COURT adoption fixture beside its MUDDLE host. |
-| 09 | MUDDLE mapping | pending | Map broader MUDDLE snapshot lessons into COURT terminology without forcing migration. |
+| 09 | Laver Cup | complete | Recorded cross-surface migration decisions for COURT, MUDDLE, RALLY, RACKET, and AMAZE. |
+| 10 | MUDDLE mapping | pending | Map broader MUDDLE snapshot lessons into COURT terminology without forcing migration. |
 
 ## Success criteria
 
@@ -43,6 +44,8 @@ owning product rules or engine rendering.
   product-owned scripts.
 - Davis Cup proves one product slice can expose COURT and RACKET compatibility
   without replacing the MUDDLE path.
+- Laver Cup records which capabilities graduate into COURT and which stay in
+  MUDDLE/RALLY before direct product dependency expands.
 - `cargo test --quiet` passes.
 
 ## Validation

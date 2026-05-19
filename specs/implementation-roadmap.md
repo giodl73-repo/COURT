@@ -183,6 +183,8 @@ Exit gate:
 
 Goal: decide what graduates into COURT after multiple surfaces prove value.
 
+Status: complete for the first cross-surface migration decision record.
+
 COURT layers:
 
 - cross-adapter comparison,
