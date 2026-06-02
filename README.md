@@ -29,6 +29,7 @@ cargo test --quiet
 
 - `docs\research\fontes-mit-game-courses.md` records the local MIT game-course
   evidence and rights boundaries.
+- `docs\rune\README.md` describes the retained RUNE experience contract evidence.
 - `specs\experience-framework-foundation.md` defines the first contract areas.
 - `specs\engine-adapter-contract.md` defines what RACKET must prove without
   owning product rules.
@@ -41,8 +42,9 @@ cargo test --quiet
 
 ## Current stop point
 
-The foundation wave is wrapped. COURT is ready for additional product fixtures
-or evidence references, but not for absorbing MUDDLE clients, RALLY reports, or
+The foundation wave is wrapped. COURT now retains RUNE descriptor evidence for
+its portable experience contracts and is ready for additional product fixtures or
+evidence references, but not for absorbing MUDDLE clients, RALLY reports, or
 product rules.
 
 ## Non-goals
@@ -51,4 +53,3 @@ product rules.
 - No full editor or asset pipeline in the foundation wave.
 - No replacement of MUDDLE before COURT proves a cleaner generalized contract.
 - No engine-specific rendering behavior in the core crate.
-

@@ -32,6 +32,8 @@ new API growth behind MIT-course-grounded review:
 4. Prepare RACKET as the first downstream engine consumer.
 5. Review the FONTES MIT game-course research packet before adding provenance,
    playtest, assessment, or engine-adapter compatibility fields.
+6. Retain RUNE descriptor evidence for the stable COURT contract slice so AI
+   agents can inspect experience shape without source scraping.
 
 ## Review gate
 
@@ -52,4 +54,3 @@ Before COURT expands past the current minimal contract, the role packet in
 - COURT does not own rendering, audio, physics, product rules, or scene art.
 - COURT does not choose a full scene engine before RACKET proves the first
   adapter boundary.
-

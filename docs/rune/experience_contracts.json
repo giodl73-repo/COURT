@@ -1,0 +1,582 @@
+{
+  "collection_id": "court.experience_contracts",
+  "collection_version": "v0",
+  "descriptors": [
+    {
+      "id": "court.experience",
+      "version": "v0",
+      "kind": "entity",
+      "rust_type": "CourtExperience",
+      "fields": [
+        {
+          "name": "id",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "demo",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "title",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "Demo",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "surface",
+          "rust_type": "CourtSurfaceKind",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "Native2d",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "intent",
+          "rust_type": "CourtExperienceIntent",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "CourtExperienceIntent",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "provenance",
+          "rust_type": "CourtProvenance",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "product-authored",
+            "stability": "stable"
+          }
+        }
+      ],
+      "invariants": [
+        {
+          "id": "court.experience.id.present",
+          "text": "id is not empty"
+        }
+      ],
+      "trace_links": [
+        {
+          "relation": "requirement",
+          "target": "RUNE-REQ-076"
+        }
+      ],
+      "extensions": [
+        {
+          "namespace": "court.experience",
+          "name": "adoption_lane",
+          "value": "second_games_spike"
+        }
+      ]
+    },
+    {
+      "id": "court.action",
+      "version": "v0",
+      "kind": "command",
+      "rust_type": "CourtAction",
+      "fields": [
+        {
+          "name": "id",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "inspect-door",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "label",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "Inspect door",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "command",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "inspect door",
+            "stability": "stable",
+            "aliases": [
+              "input"
+            ]
+          }
+        },
+        {
+          "name": "availability",
+          "rust_type": "CourtActionAvailability",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "Legal",
+            "stability": "stable"
+          }
+        }
+      ],
+      "invariants": [
+        {
+          "id": "court.action.id.present",
+          "text": "id is not empty"
+        },
+        {
+          "id": "court.action.command.present",
+          "text": "command is not empty"
+        }
+      ],
+      "trace_links": [
+        {
+          "relation": "requirement",
+          "target": "RUNE-REQ-076"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "id": "court.scene_node",
+      "version": "v0",
+      "kind": "entity",
+      "rust_type": "CourtSceneNode",
+      "fields": [
+        {
+          "name": "id",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "door",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "label",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "Door",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "player_read_label",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "A locked door",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "product_meaning",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "blocks progression",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "role",
+          "rust_type": "CourtSceneRole",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "Prop",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "x",
+          "rust_type": "i32",
+          "metadata": {
+            "required": true,
+            "unit": "scene-unit",
+            "sensitivity": "public",
+            "example": "0",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "y",
+          "rust_type": "i32",
+          "metadata": {
+            "required": true,
+            "unit": "scene-unit",
+            "sensitivity": "public",
+            "example": "0",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "width",
+          "rust_type": "i32",
+          "metadata": {
+            "required": true,
+            "unit": "scene-unit",
+            "min": "0",
+            "sensitivity": "public",
+            "example": "10",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "height",
+          "rust_type": "i32",
+          "metadata": {
+            "required": true,
+            "unit": "scene-unit",
+            "min": "0",
+            "sensitivity": "public",
+            "example": "10",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "provenance",
+          "rust_type": "Option < CourtProvenance >",
+          "metadata": {
+            "required": false,
+            "sensitivity": "public",
+            "example": "none",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "unsupported_features",
+          "rust_type": "Vec < CourtUnsupportedFeatureHint >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        }
+      ],
+      "invariants": [
+        {
+          "id": "court.scene_node.id.present",
+          "text": "id is not empty"
+        }
+      ],
+      "trace_links": [
+        {
+          "relation": "requirement",
+          "target": "RUNE-REQ-076"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "id": "court.snapshot",
+      "version": "v0",
+      "kind": "state",
+      "rust_type": "CourtSnapshot",
+      "fields": [
+        {
+          "name": "metadata",
+          "rust_type": "CourtSnapshotMetadata",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "CourtSnapshotMetadata",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "experience",
+          "rust_type": "CourtExperience",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "CourtExperience",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "state_label",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "intro",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "actions",
+          "rust_type": "Vec < CourtAction >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "scene",
+          "rust_type": "Vec < CourtSceneNode >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        }
+      ],
+      "invariants": [
+        {
+          "id": "court.snapshot.state_label.present",
+          "text": "state_label is not empty"
+        }
+      ],
+      "trace_links": [
+        {
+          "relation": "requirement",
+          "target": "RUNE-REQ-076"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "id": "court.snapshot_metadata",
+      "version": "v0",
+      "kind": "entity",
+      "rust_type": "CourtSnapshotMetadata",
+      "fields": [
+        {
+          "name": "experience_id",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "demo",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "experience_version",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "0.1.0",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "surface",
+          "rust_type": "CourtSurfaceKind",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "Native2d",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "scene_contract_version",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "court.scene.v1",
+            "stability": "stable"
+          }
+        }
+      ],
+      "invariants": [
+        {
+          "id": "court.snapshot_metadata.experience_id.present",
+          "text": "experience_id is not empty"
+        }
+      ],
+      "trace_links": [
+        {
+          "relation": "requirement",
+          "target": "RUNE-REQ-076"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "id": "court.validation_packet",
+      "version": "v0",
+      "kind": "artifact",
+      "rust_type": "CourtValidationPacket",
+      "fields": [
+        {
+          "name": "experience_id",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "demo",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "prototype_revisions",
+          "rust_type": "Vec < CourtPrototypeRevision >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "evidence_references",
+          "rust_type": "Vec < CourtEvidenceReference >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "playtest_sessions",
+          "rust_type": "Vec < CourtPlaytestSession >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "critique_findings",
+          "rust_type": "Vec < CourtCritiqueFinding >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "focus_test_findings",
+          "rust_type": "Vec < CourtFocusTestFinding >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "assessment_targets",
+          "rust_type": "Vec < CourtAssessmentTarget >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "postmortem_notes",
+          "rust_type": "Vec < CourtPostmortemNote >",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "[]",
+            "stability": "stable"
+          }
+        }
+      ],
+      "invariants": [
+        {
+          "id": "court.validation_packet.experience_id.present",
+          "text": "experience_id is not empty"
+        }
+      ],
+      "trace_links": [
+        {
+          "relation": "requirement",
+          "target": "RUNE-REQ-076"
+        }
+      ],
+      "extensions": []
+    },
+    {
+      "id": "court.evidence_reference",
+      "version": "v0",
+      "kind": "evidence",
+      "rust_type": "CourtEvidenceReference",
+      "fields": [
+        {
+          "name": "owner_repo",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "RALLY",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "artifact_ref",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "docs/rune/simulation_contracts.json",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "evidence_kind",
+          "rust_type": "CourtEvidenceKind",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "RallyValidation",
+            "stability": "stable"
+          }
+        },
+        {
+          "name": "summary",
+          "rust_type": "String",
+          "metadata": {
+            "required": true,
+            "sensitivity": "public",
+            "example": "RUNE contract evidence",
+            "stability": "stable"
+          }
+        }
+      ],
+      "invariants": [
+        {
+          "id": "court.evidence_reference.artifact_ref.present",
+          "text": "artifact_ref is not empty"
+        }
+      ],
+      "trace_links": [
+        {
+          "relation": "requirement",
+          "target": "RUNE-REQ-076"
+        }
+      ],
+      "extensions": []
+    }
+  ]
+}

@@ -6,4 +6,8 @@ description = "Product-neutral scalable experience framework contracts."
 license = "MIT"
 
 [dependencies]
+rune-core = { git = "https://github.com/giodl73-repo/RUNE.git", rev = "ad0097001138c63c12d23e5caef861eac0f5aed6" }
+rune-derive = { git = "https://github.com/giodl73-repo/RUNE.git", rev = "ad0097001138c63c12d23e5caef861eac0f5aed6" }
 
+[dev-dependencies]
+serde_json = "1"

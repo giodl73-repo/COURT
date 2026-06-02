@@ -3,12 +3,60 @@
 //! COURT defines the portable state/action/snapshot/scene boundary that lets
 //! products scale across terminal, browser, native, and authored-scene surfaces.
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+use rune_core::{ContractRegistration, DescriptorCollectionDocument, RuneContract};
+use rune_derive::RuneContract as DeriveRuneContract;
+
+pub const RUNE_COLLECTION_ID: &str = "court.experience_contracts";
+pub const RUNE_COLLECTION_VERSION: &str = "v0";
+
+#[derive(Debug, Clone, PartialEq, Eq, DeriveRuneContract)]
+#[rune(
+    id = "court.experience",
+    version = "v0",
+    kind = "entity",
+    requirement = "RUNE-REQ-076",
+    invariant(id = "court.experience.id.present", text = "id is not empty"),
+    extension(
+        namespace = "court.experience",
+        name = "adoption_lane",
+        value = "second_games_spike"
+    )
+)]
 pub struct CourtExperience {
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "demo",
+        stability = "stable"
+    )]
     pub id: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "Demo",
+        stability = "stable"
+    )]
     pub title: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "Native2d",
+        stability = "stable"
+    )]
     pub surface: CourtSurfaceKind,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "CourtExperienceIntent",
+        stability = "stable"
+    )]
     pub intent: CourtExperienceIntent,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "product-authored",
+        stability = "stable"
+    )]
     pub provenance: CourtProvenance,
 }
 
@@ -59,11 +107,44 @@ pub enum CourtProvenanceClass {
     ExternalBoundary,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, DeriveRuneContract)]
+#[rune(
+    id = "court.action",
+    version = "v0",
+    kind = "command",
+    requirement = "RUNE-REQ-076",
+    invariant(id = "court.action.id.present", text = "id is not empty"),
+    invariant(id = "court.action.command.present", text = "command is not empty")
+)]
 pub struct CourtAction {
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "inspect-door",
+        stability = "stable"
+    )]
     pub id: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "Inspect door",
+        stability = "stable"
+    )]
     pub label: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "inspect door",
+        stability = "stable",
+        alias = "input"
+    )]
     pub command: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "Legal",
+        stability = "stable"
+    )]
     pub availability: CourtActionAvailability,
 }
 
@@ -88,18 +169,97 @@ impl CourtActionAvailability {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, DeriveRuneContract)]
+#[rune(
+    id = "court.scene_node",
+    version = "v0",
+    kind = "entity",
+    requirement = "RUNE-REQ-076",
+    invariant(id = "court.scene_node.id.present", text = "id is not empty")
+)]
 pub struct CourtSceneNode {
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "door",
+        stability = "stable"
+    )]
     pub id: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "Door",
+        stability = "stable"
+    )]
     pub label: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "A locked door",
+        stability = "stable"
+    )]
     pub player_read_label: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "blocks progression",
+        stability = "stable"
+    )]
     pub product_meaning: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "Prop",
+        stability = "stable"
+    )]
     pub role: CourtSceneRole,
+    #[rune_field(
+        required = true,
+        unit = "scene-unit",
+        sensitivity = "public",
+        example = "0",
+        stability = "stable"
+    )]
     pub x: i32,
+    #[rune_field(
+        required = true,
+        unit = "scene-unit",
+        sensitivity = "public",
+        example = "0",
+        stability = "stable"
+    )]
     pub y: i32,
+    #[rune_field(
+        required = true,
+        unit = "scene-unit",
+        min = "0",
+        sensitivity = "public",
+        example = "10",
+        stability = "stable"
+    )]
     pub width: i32,
+    #[rune_field(
+        required = true,
+        unit = "scene-unit",
+        min = "0",
+        sensitivity = "public",
+        example = "10",
+        stability = "stable"
+    )]
     pub height: i32,
+    #[rune_field(
+        required = false,
+        sensitivity = "public",
+        example = "none",
+        stability = "stable"
+    )]
     pub provenance: Option<CourtProvenance>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub unsupported_features: Vec<CourtUnsupportedFeatureHint>,
 }
 
@@ -122,20 +282,94 @@ pub enum CourtSceneRole {
     Boundary,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, DeriveRuneContract)]
+#[rune(
+    id = "court.snapshot",
+    version = "v0",
+    kind = "state",
+    requirement = "RUNE-REQ-076",
+    invariant(
+        id = "court.snapshot.state_label.present",
+        text = "state_label is not empty"
+    )
+)]
 pub struct CourtSnapshot {
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "CourtSnapshotMetadata",
+        stability = "stable"
+    )]
     pub metadata: CourtSnapshotMetadata,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "CourtExperience",
+        stability = "stable"
+    )]
     pub experience: CourtExperience,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "intro",
+        stability = "stable"
+    )]
     pub state_label: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub actions: Vec<CourtAction>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub scene: Vec<CourtSceneNode>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, DeriveRuneContract)]
+#[rune(
+    id = "court.snapshot_metadata",
+    version = "v0",
+    kind = "entity",
+    requirement = "RUNE-REQ-076",
+    invariant(
+        id = "court.snapshot_metadata.experience_id.present",
+        text = "experience_id is not empty"
+    )
+)]
 pub struct CourtSnapshotMetadata {
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "demo",
+        stability = "stable"
+    )]
     pub experience_id: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "0.1.0",
+        stability = "stable"
+    )]
     pub experience_version: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "Native2d",
+        stability = "stable"
+    )]
     pub surface: CourtSurfaceKind,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "court.scene.v1",
+        stability = "stable"
+    )]
     pub scene_contract_version: String,
 }
 
@@ -169,15 +403,73 @@ pub enum CourtHostError {
     RejectedAction { action: String, reason: String },
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, DeriveRuneContract)]
+#[rune(
+    id = "court.validation_packet",
+    version = "v0",
+    kind = "artifact",
+    requirement = "RUNE-REQ-076",
+    invariant(
+        id = "court.validation_packet.experience_id.present",
+        text = "experience_id is not empty"
+    )
+)]
 pub struct CourtValidationPacket {
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "demo",
+        stability = "stable"
+    )]
     pub experience_id: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub prototype_revisions: Vec<CourtPrototypeRevision>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub evidence_references: Vec<CourtEvidenceReference>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub playtest_sessions: Vec<CourtPlaytestSession>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub critique_findings: Vec<CourtCritiqueFinding>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub focus_test_findings: Vec<CourtFocusTestFinding>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub assessment_targets: Vec<CourtAssessmentTarget>,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "[]",
+        stability = "stable"
+    )]
     pub postmortem_notes: Vec<CourtPostmortemNote>,
 }
 
@@ -199,11 +491,45 @@ impl CourtValidationPacket {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, DeriveRuneContract)]
+#[rune(
+    id = "court.evidence_reference",
+    version = "v0",
+    kind = "evidence",
+    requirement = "RUNE-REQ-076",
+    invariant(
+        id = "court.evidence_reference.artifact_ref.present",
+        text = "artifact_ref is not empty"
+    )
+)]
 pub struct CourtEvidenceReference {
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "RALLY",
+        stability = "stable"
+    )]
     pub owner_repo: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "docs/rune/simulation_contracts.json",
+        stability = "stable"
+    )]
     pub artifact_ref: String,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "RallyValidation",
+        stability = "stable"
+    )]
     pub evidence_kind: CourtEvidenceKind,
+    #[rune_field(
+        required = true,
+        sensitivity = "public",
+        example = "RUNE contract evidence",
+        stability = "stable"
+    )]
     pub summary: String,
 }
 
@@ -296,6 +622,46 @@ pub struct CourtPostmortemNote {
     pub worked: String,
     pub failed: String,
     pub next_design_constraint: String,
+}
+
+pub const RUNE_CONTRACTS: &[ContractRegistration] = &[
+    ContractRegistration {
+        name: "CourtExperience",
+        descriptor: CourtExperience::descriptor,
+    },
+    ContractRegistration {
+        name: "CourtAction",
+        descriptor: CourtAction::descriptor,
+    },
+    ContractRegistration {
+        name: "CourtSceneNode",
+        descriptor: CourtSceneNode::descriptor,
+    },
+    ContractRegistration {
+        name: "CourtSnapshot",
+        descriptor: CourtSnapshot::descriptor,
+    },
+    ContractRegistration {
+        name: "CourtSnapshotMetadata",
+        descriptor: CourtSnapshotMetadata::descriptor,
+    },
+    ContractRegistration {
+        name: "CourtValidationPacket",
+        descriptor: CourtValidationPacket::descriptor,
+    },
+    ContractRegistration {
+        name: "CourtEvidenceReference",
+        descriptor: CourtEvidenceReference::descriptor,
+    },
+];
+
+pub fn rune_descriptor_collection() -> Result<DescriptorCollectionDocument, String> {
+    DescriptorCollectionDocument::from_registrations(
+        RUNE_COLLECTION_ID,
+        RUNE_COLLECTION_VERSION,
+        RUNE_CONTRACTS,
+        "COURT-RUNE-001",
+    )
 }
 
 #[cfg(test)]
@@ -475,5 +841,38 @@ mod tests {
             "product-owned-script-001"
         );
         assert!(packet.has_evidence_reference("PRODUCT", "tests::opening_path"));
+    }
+
+    #[test]
+    fn rune_contract_registry_preserves_experience_metadata() {
+        let collection = rune_descriptor_collection().expect("rune descriptor collection");
+
+        assert_eq!(collection.collection_id, RUNE_COLLECTION_ID);
+        assert_eq!(collection.descriptors[0].id, "court.experience");
+        assert_eq!(
+            collection.descriptors[0].fields[0].metadata.required,
+            Some(true)
+        );
+        assert_eq!(
+            collection.descriptors[1].fields[2].metadata.aliases[0],
+            "input"
+        );
+        assert_eq!(
+            collection.descriptors[2].fields[5].metadata.unit,
+            Some("scene-unit".to_owned())
+        );
+    }
+
+    #[test]
+    fn rune_contract_registry_matches_retained_fixture() {
+        let collection = rune_descriptor_collection().expect("rune descriptor collection");
+        let actual = serde_json::to_string_pretty(&collection).expect("serialize rune collection");
+        let expected = include_str!("../../../docs/rune/experience_contracts.json");
+
+        assert_eq!(normalize_newlines(&actual), normalize_newlines(expected));
+    }
+
+    fn normalize_newlines(value: &str) -> String {
+        value.replace("\r\n", "\n").trim_end().to_owned()
     }
 }

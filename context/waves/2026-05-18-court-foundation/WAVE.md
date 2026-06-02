@@ -30,6 +30,7 @@ owning product rules or engine rendering.
 | 13 | Evidence references | complete | COURT packets link product-owned MUDDLE/RALLY/portfolio evidence without copying artifact bodies. |
 | 14 | Foundation closeout | complete | Recorded the pause point, boundaries, deferred work, and dormant next options. |
 | 15 | MUDDLE mapping | deferred | Map broader MUDDLE snapshot lessons only when a product or migration proposal needs it. |
+| 16 | RUNE experience contracts | complete | Retained RUNE descriptors for COURT's stable experience contract slice. |
 
 ## Success criteria
 
@@ -56,6 +57,8 @@ owning product rules or engine rendering.
 - Follow-up fixture work proves RACKET runtime smoke over AMAZE, a second
   non-escape-room TIGRIS fixture, and explicit product-owned evidence references.
 - Foundation closeout names what remains deferred before the wave pauses.
+- RUNE experience contracts expose the stable COURT slice as retained descriptor
+  evidence without product-specific rules.
 - `cargo test --quiet` passes.
 
 ## Validation
@@ -63,5 +66,4 @@ owning product rules or engine rendering.
 - `cargo fmt --check`
 - `cargo test --quiet`
 - `git diff --check`
-
 
