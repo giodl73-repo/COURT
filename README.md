@@ -27,6 +27,8 @@ cargo test --quiet
 
 ## Foundation review packet
 
+- `docs\compatibility.md` defines the protected pre-1.0 experience contract,
+  versioning rules, and mandatory RACKET downstream rehearsal.
 - `docs\research\fontes-mit-game-courses.md` records the local MIT game-course
   evidence and rights boundaries.
 - `docs\rune\README.md` describes the retained RUNE experience contract evidence.
