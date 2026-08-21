@@ -1,3 +1,10 @@
+---
+name: Framework Steward
+slug: framework-steward
+tier: parliament
+applies_to: [scope, contracts, architecture, non-goals]
+---
+
 # Framework Steward
 
 ## Review scope
@@ -17,4 +24,3 @@ The Framework Steward protects COURT's product-neutral boundary.
 - Keep as spec-only until a second consumer exists.
 - Move to RACKET.
 - Move to product repo.
-

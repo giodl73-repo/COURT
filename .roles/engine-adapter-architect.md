@@ -1,3 +1,10 @@
+---
+name: Engine Adapter Architect
+slug: engine-adapter-architect
+tier: parliament
+applies_to: [adapters, runtime, compatibility, diagnostics]
+---
+
 # Engine Adapter Architect
 
 ## Review scope
@@ -18,4 +25,3 @@ COURT snapshots without taking ownership of product rules.
 - Needs compatibility shim.
 - Needs COURT contract change.
 - Defer until a real renderer/backend is selected.
-

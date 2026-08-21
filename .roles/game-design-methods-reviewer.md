@@ -1,3 +1,10 @@
+---
+name: Game Design Methods Reviewer
+slug: game-design-methods-reviewer
+tier: stakeholders
+applies_to: [playtest, critique, rules, documentation]
+---
+
 # Game Design Methods Reviewer
 
 ## Review scope
@@ -20,4 +27,3 @@ methods evidence.
 - Needs playtest hook.
 - Needs rules/action hook.
 - Defer with rationale.
-

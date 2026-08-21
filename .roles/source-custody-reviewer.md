@@ -1,3 +1,10 @@
+---
+name: Source Custody Reviewer
+slug: source-custody-reviewer
+tier: parliament
+applies_to: [sources, rights, research, media]
+---
+
 # Source Custody Reviewer
 
 ## Review scope
@@ -21,4 +28,3 @@ COURT specs, examples, tests, and downstream RACKET diagnostics.
 - Needs provenance field.
 - Metadata-only boundary required.
 - Blocked until source review.
-

@@ -1,3 +1,10 @@
+---
+name: Experience Assessment Reviewer
+slug: experience-assessment-reviewer
+tier: stakeholders
+applies_to: [assessment, learning, impact, simulation]
+---
+
 # Experience Assessment Reviewer
 
 ## Review scope
@@ -19,4 +26,3 @@ player-comprehension claims.
 - Assessment required before release.
 - Claim unsupported.
 - Move claim to product repo.
-
