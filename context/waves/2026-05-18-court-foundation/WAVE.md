@@ -31,6 +31,7 @@ owning product rules or engine rendering.
 | 14 | Foundation closeout | complete | Recorded the pause point, boundaries, deferred work, and dormant next options. |
 | 15 | MUDDLE mapping | deferred | Map broader MUDDLE snapshot lessons only when a product or migration proposal needs it. |
 | 16 | RUNE experience contracts | complete | Retained RUNE descriptors for COURT's stable experience contract slice. |
+| 17 | PITFALL doctrine integration | complete | Indexed COURT's reusable contract-boundary failure memory and review gates. |
 
 ## Success criteria
 
@@ -59,6 +60,8 @@ owning product rules or engine rendering.
 - Foundation closeout names what remains deferred before the wave pauses.
 - RUNE experience contracts expose the stable COURT slice as retained descriptor
   evidence without product-specific rules.
+- PITFALL doctrine names the reusable framework failure modes before further
+  COURT adoption or migration pressure expands the contract.
 - `cargo test --quiet` passes.
 
 ## Validation

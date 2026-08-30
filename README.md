@@ -49,6 +49,13 @@ its portable experience contracts and is ready for additional product fixtures o
 evidence references, but not for absorbing MUDDLE clients, RALLY reports, or
 product rules.
 
+## PITFALL doctrine
+
+COURT's reusable failure memory is indexed at
+[`.pitfall/PITFALL.md`](.pitfall/PITFALL.md). It keeps contract-readiness
+overclaims, engine leakage, evidence ownership drift, source-custody mistakes,
+and migration pressure visible before framework expansion.
+
 ## Non-goals
 
 - No product-specific game rules in `court-core`.
