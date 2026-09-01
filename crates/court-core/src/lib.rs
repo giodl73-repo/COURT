@@ -667,6 +667,31 @@ pub fn rune_descriptor_collection() -> Result<DescriptorCollectionDocument, Stri
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serde_json::Value;
+
+    fn readiness_boundaries() -> Value {
+        serde_json::from_str(include_str!(
+            "../../../docs/court-readiness-boundaries.v1.json"
+        ))
+        .expect("readiness boundary manifest must remain valid JSON")
+    }
+
+    fn pitfall_boundary<'a>(manifest: &'a Value, pitfall: &str) -> &'a Value {
+        manifest["pitfall_boundaries"]
+            .as_array()
+            .expect("manifest should retain pitfall boundaries")
+            .iter()
+            .find(|boundary| boundary["pitfall"] == pitfall)
+            .unwrap_or_else(|| panic!("missing boundary for {pitfall}"))
+    }
+
+    fn array_contains(value: &Value, needle: &str) -> bool {
+        value
+            .as_array()
+            .expect("expected JSON array")
+            .iter()
+            .any(|entry| entry.as_str() == Some(needle))
+    }
 
     #[test]
     fn snapshot_exposes_actions_and_scene_roles() {
@@ -841,6 +866,84 @@ mod tests {
             "product-owned-script-001"
         );
         assert!(packet.has_evidence_reference("PRODUCT", "tests::opening_path"));
+    }
+
+    #[test]
+    fn contract_proof_does_not_claim_product_readiness() {
+        // Checks COURT-PF-01.
+        let readme = include_str!("../../../README.md");
+        let playtest_contract = include_str!("../../../specs/playtest-validation-contract.md");
+        let closeout =
+            include_str!("../../../specs/role-reviews/foundation-closeout-2026-05-18.md");
+        let manifest = readiness_boundaries();
+        let boundary = pitfall_boundary(&manifest, "COURT-PF-01");
+
+        assert!(readme.contains("not for absorbing MUDDLE clients"));
+        assert!(playtest_contract.contains("Product repos own player-study details"));
+        assert!(closeout.contains("Declaring product migration ready"));
+        assert_eq!(boundary["required_owner"], "Experience Assessment Reviewer");
+        for blocked in [
+            "product readiness",
+            "player comprehension proven",
+            "player enjoyment proven",
+            "learning outcome proven",
+            "release quality proven",
+            "customer-ready experience",
+            "product-owned playtest complete",
+        ] {
+            assert!(array_contains(&boundary["blocked_claims"], blocked));
+        }
+        for required in [
+            "product-owned playtest script",
+            "product-owned player findings",
+            "critique disposition",
+            "assessment pass/fail rule",
+            "release gate owner",
+            "product repository acceptance",
+        ] {
+            assert!(array_contains(
+                &boundary["required_product_readiness_evidence"],
+                required
+            ));
+        }
+    }
+
+    #[test]
+    fn migration_requires_product_need_and_rehearsal() {
+        // Checks COURT-PF-05.
+        let readme = include_str!("../../../README.md");
+        let plan = include_str!("../../../PRODUCT_PLAN.md");
+        let compatibility = include_str!("../../../docs/compatibility.md");
+        let foundation = include_str!("../../../specs/experience-framework-foundation.md");
+        let manifest = readiness_boundaries();
+        let boundary = pitfall_boundary(&manifest, "COURT-PF-05");
+
+        assert!(readme.contains("not for absorbing MUDDLE clients"));
+        assert!(plan.contains("does not replace MUDDLE"));
+        assert!(compatibility.contains("downstream rehearsal"));
+        assert!(foundation.contains("product rules"));
+        assert_eq!(boundary["required_owner"], "Framework Steward");
+        for blocked in [
+            "big-bang MUDDLE migration",
+            "RALLY report absorption",
+            "product rule ownership",
+            "runtime behavior ownership",
+            "persistence ownership",
+            "migration inevitability",
+            "downstream adoption approval",
+        ] {
+            assert!(array_contains(&boundary["blocked_claims"], blocked));
+        }
+        for gate in [
+            "real product fixture",
+            "neutral contract expression",
+            "adapter rehearsal",
+            "existing behavior preservation",
+            "concrete product benefit",
+            "affected repo acceptance",
+        ] {
+            assert!(array_contains(&boundary["required_migration_gates"], gate));
+        }
     }
 
     #[test]

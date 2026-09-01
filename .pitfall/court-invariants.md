@@ -59,3 +59,20 @@
 **Evidence:** `README.md`, `context/waves/2026-05-18-court-foundation/WAVE.md`, and `docs/compatibility.md`.
 
 **Test:** `cargo fmt --all -- --check`, `cargo test --quiet`, `cargo clippy --workspace --all-targets -- -D warnings`, and `git diff --check`.
+
+## COURT-I-06: Readiness And Migration Boundaries Are Machine-Readable
+
+**Status:** VERIFIED
+
+**Invariant:** COURT contract proof, adapter rehearsal, product readiness, and
+MUDDLE/RALLY migration claims expose what they can support and which product,
+release, or downstream-adoption claims they cannot support.
+
+**Why it matters:** A green shared contract is valuable evidence, but it does
+not prove players understand or enjoy a product and does not authorize a broad
+MUDDLE/RALLY migration.
+
+**Evidence:** `docs/court-readiness-boundaries.v1.json` and
+`crates/court-core/src/lib.rs`.
+
+**Test:** `cargo test --quiet`.

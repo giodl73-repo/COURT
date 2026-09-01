@@ -1,0 +1,82 @@
+{
+  "$schema": "court.readiness-boundaries.v1",
+  "owner": "COURT maintainers",
+  "purpose": "Machine-readable boundaries for contract proof, product readiness, and MUDDLE/RALLY migration claims.",
+  "authority": {
+    "portable_experience_contracts": "COURT",
+    "rune_descriptor_and_contract_shape": "COURT plus RUNE descriptors",
+    "engine_adapter_rehearsal": "RACKET and future adapter owners",
+    "product_rules_fantasy_scene_direction_and_win_conditions": "product repositories",
+    "player_comprehension_enjoyment_learning_release_quality": "product-owned playtest, critique, assessment, and release evidence",
+    "muddle_clients_persistence_runtime_behavior": "MUDDLE until a reviewed product fixture proves migration benefit",
+    "rally_reports_and_simulation_readiness": "RALLY and affected product repositories"
+  },
+  "pitfall_boundaries": [
+    {
+      "pitfall": "COURT-PF-01",
+      "required_owner": "Experience Assessment Reviewer",
+      "source_layer": "COURT contract proof or adapter rehearsal",
+      "may_support": [
+        "portable contract shape",
+        "RUNE descriptor retention",
+        "RACKET compatibility rehearsal",
+        "validation-packet shape",
+        "future product fixture planning"
+      ],
+      "blocked_claims": [
+        "product readiness",
+        "player comprehension proven",
+        "player enjoyment proven",
+        "learning outcome proven",
+        "release quality proven",
+        "customer-ready experience",
+        "product-owned playtest complete"
+      ],
+      "required_product_readiness_evidence": [
+        "product-owned playtest script",
+        "product-owned player findings",
+        "critique disposition",
+        "assessment pass/fail rule",
+        "release gate owner",
+        "product repository acceptance"
+      ]
+    },
+    {
+      "pitfall": "COURT-PF-05",
+      "required_owner": "Framework Steward",
+      "source_layer": "migration proposal or dependency adoption",
+      "may_support": [
+        "neutral contract expression",
+        "adapter consumption rehearsal",
+        "existing behavior preservation check",
+        "bounded product fixture migration",
+        "future authored-scene engine planning"
+      ],
+      "blocked_claims": [
+        "big-bang MUDDLE migration",
+        "RALLY report absorption",
+        "product rule ownership",
+        "runtime behavior ownership",
+        "persistence ownership",
+        "migration inevitability",
+        "downstream adoption approval"
+      ],
+      "required_migration_gates": [
+        "real product fixture",
+        "neutral contract expression",
+        "adapter rehearsal",
+        "existing behavior preservation",
+        "concrete product benefit",
+        "affected repo acceptance"
+      ]
+    }
+  ],
+  "validation": [
+    "cargo fmt --all -- --check",
+    "cargo test --quiet",
+    "cargo clippy --workspace --all-targets -- -D warnings",
+    "pitfall-cli validate",
+    "check_pitfall.py",
+    "git diff --check"
+  ]
+}

@@ -2,7 +2,7 @@
 
 ## COURT-PF-01: Contract Proof Becomes Product Readiness
 
-**Status:** OPEN
+**Status:** MITIGATED
 
 **Pattern:** A green COURT contract, retained RUNE descriptor, or RACKET rehearsal is treated as proof that a product experience is ready for players.
 
@@ -10,9 +10,21 @@
 
 **Detection difficulty:** Portable shape tests and adapter smokes are concrete, but they do not prove player comprehension, enjoyment, learning, or release quality.
 
-**Structural solution:** Require product-owned playtest, critique, assessment, and release evidence before claiming product readiness.
+**Structural solution:** Require product-owned playtest, critique, assessment,
+and release evidence before claiming product readiness.
+`docs/court-readiness-boundaries.v1.json` now records contract-proof authority,
+blocked readiness claims, required product-readiness evidence, and Experience
+Assessment Reviewer ownership in machine-readable form.
 
-**Evidence:** `specs/playtest-validation-contract.md`, `specs/role-reviews/foundation-closeout-2026-05-18.md`, and `crates/court-core/src/lib.rs`.
+**Evidence:** `specs/playtest-validation-contract.md`,
+`specs/role-reviews/foundation-closeout-2026-05-18.md`,
+`crates/court-core/src/lib.rs`, and
+`docs/court-readiness-boundaries.v1.json`.
+
+**Test:** `cargo test --quiet` parses the readiness boundary and asserts that
+COURT contract proof cannot claim product readiness, player comprehension,
+player enjoyment, learning outcomes, release quality, customer-ready
+experience, or completed product-owned playtests.
 
 ## COURT-PF-02: Engine Convenience Leaks Into Portable Contracts
 
@@ -58,7 +70,7 @@
 
 ## COURT-PF-05: Migration Momentum Absorbs MUDDLE Or RALLY
 
-**Status:** OPEN
+**Status:** MITIGATED
 
 **Pattern:** COURT foundation success is used to justify moving MUDDLE clients, persistence, runtime behavior, RALLY reports, or product rules into COURT before a real product fixture needs it.
 
@@ -66,6 +78,18 @@
 
 **Detection difficulty:** A shared contract foundation can make broader consolidation feel inevitable.
 
-**Structural solution:** Require neutral contract expression, adapter consumption, existing behavior preservation, and a concrete product benefit before migration.
+**Structural solution:** Require neutral contract expression, adapter
+consumption, existing behavior preservation, and a concrete product benefit
+before migration. `docs/court-readiness-boundaries.v1.json` now records
+migration authority, blocked MUDDLE/RALLY absorption claims, required migration
+gates, and Framework Steward ownership in machine-readable form.
 
-**Evidence:** `PRODUCT_PLAN.md`, `README.md`, `specs/experience-framework-foundation.md`, and `context/waves/2026-05-18-court-foundation/WAVE.md`.
+**Evidence:** `PRODUCT_PLAN.md`, `README.md`,
+`specs/experience-framework-foundation.md`,
+`context/waves/2026-05-18-court-foundation/WAVE.md`, and
+`docs/court-readiness-boundaries.v1.json`.
+
+**Test:** `cargo test --quiet` parses the readiness boundary and asserts that
+migration proposals cannot claim big-bang MUDDLE migration, RALLY report
+absorption, product-rule/runtime/persistence ownership, migration inevitability,
+or downstream adoption approval.
