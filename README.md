@@ -12,6 +12,12 @@ The foundation design is grounded in the local FONTES MIT game-course corpus.
 See `docs\research\fontes-mit-game-courses.md` and the review specs in
 `specs\` before expanding `court-core`.
 
+## Rust/WASM snapshot inspector
+
+A [standalone browser workbench](browser/inspector/README.md) is in qualification.
+It runs the unchanged native snapshot queries on own JSON. Hosted checks, exact
+artifact custody and live verification remain required before a published release.
+
 ## First command
 
 ```powershell

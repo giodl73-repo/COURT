@@ -6,6 +6,16 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--bindgen',required=True)
 a=parser.parse_args()
 target=pathlib.Path(os.environ['CARGO_TARGET_DIR'])
+assert target.is_absolute(),'CARGO_TARGET_DIR must be absolute'
+assert subprocess.check_output([a.bindgen,'--version']).decode().strip()=='wasm-bindgen 0.2.127'
+build_env=dict(os.environ)
+cargo_home=pathlib.Path(os.environ.get('CARGO_HOME',str(pathlib.Path.home()/'.cargo'))).resolve()
+build_env['RUSTFLAGS']=' '.join(['--remap-path-prefix='+str(root)+'=/court','--remap-path-prefix='+str(cargo_home)+'=/cargo'])
+for arguments in [
+    ['--release','--target','wasm32-unknown-unknown','--lib'],
+    ['--bin','court-inspector-cli'],
+]:
+    subprocess.run(['cargo','+1.95.0','build','--manifest-path',str(p/'Cargo.toml'),'--locked',*arguments],cwd=root,env=build_env,check=True)
 site=root/'target/court-prototype/COURT/inspector'
 site.mkdir(parents=True,exist_ok=True)
 for name in ['index.html','style.css','app.js','worker.js']:
