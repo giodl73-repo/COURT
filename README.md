@@ -12,6 +12,22 @@ The foundation design is grounded in the local FONTES MIT game-course corpus.
 See `docs\research\fontes-mit-game-courses.md` and the review specs in
 `specs\` before expanding `court-core`.
 
+## Rust/WASM snapshot inspector
+
+[Open the snapshot inspector](https://giodl73-repo.github.io/COURT/inspector/)
+to inspect an authored example or your own JSON with the existing Rust core.
+It shows native player-available commands, scene roles and declared feature hints
+without executing actions. Original opened bytes, current text, an explicit LF
+copy and the full report have separate downloads. Source, compiled WASM,
+build provenance and license routes stay available independently of the worker.
+
+See the [workbench guide](browser/inspector/README.md),
+[qualification record](context/waves/2026-11-01-snapshot-inspector/RELEASE.md),
+and [delivery workflow](.github/workflows/pages.yml). Exact deployed source is
+identified by the site's provenance.json; a source ZIP is a separate download
+from the compiled WASM. Snapshot queries do not certify a renderer, product,
+source rights, playtest outcome or migration readiness.
+
 ## First command
 
 ```powershell
@@ -48,6 +64,13 @@ The foundation wave is wrapped. COURT now retains RUNE descriptor evidence for
 its portable experience contracts and is ready for additional product fixtures or
 evidence references, but not for absorbing MUDDLE clients, RALLY reports, or
 product rules.
+
+## PITFALL doctrine
+
+COURT's reusable failure memory is indexed at
+[`.pitfall/PITFALL.md`](.pitfall/PITFALL.md). It keeps contract-readiness
+overclaims, engine leakage, evidence ownership drift, source-custody mistakes,
+and migration pressure visible before framework expansion.
 
 ## Non-goals
 

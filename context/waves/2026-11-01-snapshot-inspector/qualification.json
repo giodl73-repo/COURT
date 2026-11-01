@@ -1,0 +1,13 @@
+{
+  "prototype_only": true,
+  "native_cases": 38,
+  "wasm_bytes": 256576,
+  "wasm_sha256": "6d321d7427000f2d53f08df8399b8fa81d25b8e71447a46c19e66619656a55f4",
+  "source_entry": "9af0d6de0aea1a54e61c9a78c8e18ac6a8b24706",
+  "foundation_tests": 5,
+  "adapter_tests": 5,
+  "browser_tests": 3,
+  "host_lint": "Rust 1.95.0 all-target strict passes",
+  "deployed": false,
+  "core_changed": false
+}
