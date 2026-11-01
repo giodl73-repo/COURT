@@ -1,4 +1,4 @@
-# COURT snapshot inspector wave — November 1, 2026
+# COURT snapshot inspector wave â€” November 1, 2026
 
 Goal: let a reader inspect their own portable experience snapshot using existing
 COURT Rust queries in a browser. Affected crate: standalone unpublished

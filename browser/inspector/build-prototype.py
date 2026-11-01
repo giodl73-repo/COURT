@@ -8,7 +8,7 @@ a=parser.parse_args()
 target=pathlib.Path(os.environ['CARGO_TARGET_DIR'])
 site=root/'target/court-prototype/COURT/inspector'
 site.mkdir(parents=True,exist_ok=True)
-for name in ['index.html','app.js','worker.js']:
+for name in ['index.html','style.css','app.js','worker.js']:
     shutil.copyfile(p/'web'/name,site/name)
 shutil.copyfile(p/'fixtures/snapshot.json',site/'snapshot.json')
 subprocess.run([a.bindgen,'--target','web','--out-dir',str(site/'pkg'),'--out-name','court_inspector',str(target/'wasm32-unknown-unknown/release/court_inspector.wasm')],check=True)
