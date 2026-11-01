@@ -27,3 +27,17 @@ Cargo metadata (which includes local paths), scratch requests, test reports and
 screenshots stay outside that tree. The 5 MB inspector budget is enforced.
 Publication also requires hosted checks, complete artifact verification before
 and after artifact transfer, deployment from main, and fresh live verification.
+
+Independent delivered-source replay (after clean packaging):
+
+```text
+python browser/inspector/verify-source.py --bindgen /absolute/path/to/wasm-bindgen
+```
+
+It extracts the delivered ZIP outside Git, repeats five foundation and five
+adapter native tests, builds native CLI/release WASM, requires identical inputs
+and serialized native responses, and runs fourteen rebuilt browser behavior
+checks including native/WASM equality. The two exact original-artifact delivery
+cases are deliberately separate; the full packaged site requires all sixteen.
+Original/rebuilt WASM hashes are recorded without claiming binary identity.
+The owned temporary extraction is removed after QA receipts are retained.

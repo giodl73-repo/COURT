@@ -65,3 +65,17 @@ review, hosted CI and artifact custody, deployment of the tested artifact and
 fresh live file/browser verification. RACKET rehearsal becomes mandatory if any
 foundation contract changes; this adapter leaves foundation sources unchanged.
 Do not publish the prototype staging tree.
+
+Independent delivered-source replay (after clean packaging):
+
+```text
+python browser/inspector/verify-source.py --bindgen /absolute/path/to/wasm-bindgen
+```
+
+It extracts the delivered ZIP outside Git, repeats five foundation and five
+adapter native tests, builds native CLI/release WASM, requires identical inputs
+and serialized native responses, and runs fourteen rebuilt browser behavior
+checks including native/WASM equality. The two exact original-artifact delivery
+cases are deliberately separate; the full packaged site requires all sixteen.
+Original/rebuilt WASM hashes are recorded without claiming binary identity.
+The owned temporary extraction is removed after QA receipts are retained.
