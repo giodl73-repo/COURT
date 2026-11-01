@@ -15,7 +15,7 @@ def run(command,cwd,env=None):
  if result.returncode:raise SystemExit('Source replay failed; see .cache/source-replay.log')
  return result.stdout
 (cache/'source-replay.log').write_bytes(b'')
-with tempfile.TemporaryDirectory(prefix='court-',dir=work) as temporary:
+with tempfile.TemporaryDirectory(prefix='court replay-',dir=work) as temporary:
  base=pathlib.Path(temporary).resolve();assert base.is_relative_to(work.resolve())
  with zipfile.ZipFile(site/'source.zip') as archive:
   for name in archive.namelist():

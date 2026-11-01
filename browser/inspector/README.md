@@ -86,3 +86,9 @@ compile-time policy fixtures; all seven foundation tests pass. Production code
 before `#[cfg(test)]` is byte-identical to public entry `9af0d6d`; full foundation
 source, manifests, lock and RUNE fixtures are now protected against `8c75bfb`.
 This retains existing work rather than dropping it during pointer advancement.
+
+QA records descriptive startup, worker initialization/computation and main-thread
+roundtrip samples with user agent, hardware concurrency and input bytes, plus
+38 direct-WASM samples. These include browser/driver/serialization overhead;
+there is no comparative performance claim. The independent replay deliberately
+uses an extraction directory containing spaces to exercise portable build paths.

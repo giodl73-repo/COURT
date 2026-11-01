@@ -65,7 +65,7 @@ function fail(message) {
 function start() {
   worker?.terminate(); clearTimeout(jobTimer); generation++;
   ready = false; pending = null; clearReport(); updateControls(); engineMessage = 'Starting Rust engine...'; status(engineMessage);
-  const own = generation;
+  const own = generation, startTime = performance.now();
   try { worker = new Worker('./worker.js', {type: 'module'}); }
   catch { fail('Rust worker could not start.'); return; }
   const active = worker;
@@ -75,6 +75,8 @@ function start() {
     if (own !== generation || active !== worker) return;
     if (data.type === 'ready' && !ready) {
       clearTimeout(jobTimer); ready = true; updateControls();
+      $('status').dataset.startupMs = String(performance.now() - startTime);
+      if (Number.isFinite(data.initialization_ms)) $('status').dataset.workerInitializationMs = String(data.initialization_ms);
       status('Ready. Inspect your snapshot or load the example.'); return;
     }
     if (!pending || data.id !== pending.id) return;
@@ -83,6 +85,9 @@ function start() {
     if (data.type === 'error') { fail(data.message); return; }
     try {
       const result = JSON.parse(data.text); report = data.text;
+      $('status').dataset.queryRoundtripMs = String(performance.now() - request.started);
+      $('status').dataset.inputBytes = String(request.inputBytes);
+      if (Number.isFinite(data.computation_ms)) $('status').dataset.workerComputationMs = String(data.computation_ms);
       $('report').textContent = report; $('download').disabled = false; render(result);
       status(result.ok ? 'Snapshot inspected. No actions were executed.' : 'Input was rejected; see the report.');
     } catch { fail('Rust engine returned an unreadable report.'); }
@@ -109,7 +114,7 @@ input.addEventListener('drop', event => {
 $('inspect').onclick = () => {
   if (!ready || pending) return; clearReport();
   if (bytes(currentText) > MAX_BYTES) { status('Input exceeds 512 KiB UTF-8; nothing was truncated.'); return; }
-  const id = crypto.randomUUID(); pending = {id, revision}; updateControls(); status('Inspecting with Rust...');
+  const id = crypto.randomUUID(); pending = {id, revision, started: performance.now(), inputBytes: bytes(currentText)}; updateControls(); status('Inspecting with Rust...');
   const own = generation;
   jobTimer = setTimeout(() => { if (own === generation) fail('Inspection exceeded 10 seconds.'); }, 10000);
   worker.postMessage({id, text: currentText});
