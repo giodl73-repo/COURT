@@ -3,7 +3,8 @@
 Goal: let a reader inspect their own portable experience snapshot using existing
 COURT Rust queries in a browser. Affected crate: standalone unpublished
 `browser/inspector`; downstream RACKET remains unchanged. Native core/public API,
-RUNE descriptors, root manifest/lock and dependency pins stay fixed at `9af0d6d`.
+RUNE descriptors, root manifest/lock and dependency pins stay fixed at integrated canonical baseline `8c75bfb`. Production code remains
+byte-identical to public entry `9af0d6d`; see INTEGRATION.md.
 No new COURT framework fields, renderer, game rules or migration are proposed.
 
 1. Qualify the narrow portable boundary with an authored fixture, native tests,

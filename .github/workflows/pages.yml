@@ -43,7 +43,7 @@ jobs:
           echo "${install_dir}" >> "${GITHUB_PATH}"
       - name: Protect foundation and qualify native/WASM
         run: |
-          git diff --exit-code 9af0d6de0aea1a54e61c9a78c8e18ac6a8b24706 HEAD -- crates Cargo.toml Cargo.lock docs/rune
+          git diff --exit-code 8c75bfbfc2ec349b0fdded9ea1575cbfce93886e HEAD -- crates Cargo.toml Cargo.lock docs/rune
           cargo +1.95.0 test --workspace --locked
           cargo +1.95.0 test --manifest-path browser/inspector/Cargo.toml --locked
           cargo +1.95.0 clippy --manifest-path browser/inspector/Cargo.toml --locked --all-targets -- -D warnings

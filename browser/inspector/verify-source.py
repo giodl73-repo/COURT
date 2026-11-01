@@ -42,6 +42,6 @@ with tempfile.TemporaryDirectory(prefix='court-',dir=work) as temporary:
  assert browser['stats']['unexpected']==browser['stats']['skipped']==browser['stats']['flaky']==0
  shutil.copyfile(consumer/'.cache/browser-results.json',cache/'source-replay-browser.json')
  build=json.loads((consumer/'.cache/prototype-build.json').read_text(encoding='utf-8'))
- receipt={'outside_git':True,'foundation_tests':5,'adapter_tests':5,'browser_checks':browser['stats']['expected'],'identical_native_requests_and_responses':len(original),'rebuilt_wasm_sha256':build['wasm_sha256'],'original_wasm_sha256':json.loads((site/'provenance.json').read_text(encoding='utf-8'))['wasm_sha256'],'binary_identity_claimed':False}
+ receipt={'outside_git':True,'foundation_tests':7,'adapter_tests':5,'browser_checks':browser['stats']['expected'],'identical_native_requests_and_responses':len(original),'rebuilt_wasm_sha256':build['wasm_sha256'],'original_wasm_sha256':json.loads((site/'provenance.json').read_text(encoding='utf-8'))['wasm_sha256'],'binary_identity_claimed':False}
  (cache/'source-replay.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
  print(json.dumps(receipt))

@@ -17,7 +17,7 @@ def copy(source,destination):
 if run('git','status','--porcelain').strip():
     raise SystemExit('Release staging requires a clean checkout. Commit source first.')
 head=run('git','rev-parse','HEAD').decode().strip()
-run('git','diff','--exit-code','9af0d6de0aea1a54e61c9a78c8e18ac6a8b24706','--','crates','Cargo.toml','Cargo.lock','docs/rune')
+run('git','diff','--exit-code','8c75bfbfc2ec349b0fdded9ea1575cbfce93886e','--','crates','Cargo.toml','Cargo.lock','docs/rune')
 assert SITE.resolve()==(ROOT.resolve()/'target/court-release/COURT/inspector')
 if SITE.exists(): shutil.rmtree(SITE)
 SITE.mkdir(parents=True)
@@ -80,7 +80,7 @@ for package in packages:
         links.append('<p><a href="'+html.escape(path)+'">'+html.escape(path)+'</a></p>')
 (SITE/'licenses/index.html').write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>COURT licenses</title><body>'+''.join(links)+'</body></html>',encoding='utf-8')
 copy(P/'BUILD.md',SITE/'BUILD.md')
-provenance={'schema':'court-inspector-release-v1','commit':head,'foundation_source':'9af0d6de0aea1a54e61c9a78c8e18ac6a8b24706','repository':'https://github.com/giodl73-repo/COURT','exact_full_source':'https://github.com/giodl73-repo/COURT/archive/'+head+'.zip','rustc':run('rustc','+1.95.0','-vV').decode().strip(),'wasm_bindgen':'0.2.127','source_zip_sha256':digest((SITE/'source.zip').read_bytes()),'wasm_sha256':digest((SITE/'pkg/court_inspector_bg.wasm').read_bytes()),'legal_packages':len(packages),'rust_notice_files':len(rust_notices),'landing_index_sha256':digest(landing),'cross_directory_binary_identity':'Not established. Verify native/WASM response parity instead.','scope':'Snapshot query adapter. Does not execute product rules or certify rendering, source custody, evidence or assessment success.'}
+provenance={'schema':'court-inspector-release-v1','commit':head,'foundation_source':'8c75bfbfc2ec349b0fdded9ea1575cbfce93886e','repository':'https://github.com/giodl73-repo/COURT','exact_full_source':'https://github.com/giodl73-repo/COURT/archive/'+head+'.zip','rustc':run('rustc','+1.95.0','-vV').decode().strip(),'wasm_bindgen':'0.2.127','source_zip_sha256':digest((SITE/'source.zip').read_bytes()),'wasm_sha256':digest((SITE/'pkg/court_inspector_bg.wasm').read_bytes()),'legal_packages':len(packages),'rust_notice_files':len(rust_notices),'landing_index_sha256':digest(landing),'cross_directory_binary_identity':'Not established. Verify native/WASM response parity instead.','scope':'Snapshot query adapter. Does not execute product rules or certify rendering, source custody, evidence or assessment success.'}
 write_json(SITE/'provenance.json',provenance)
 files=[]
 for f in sorted(SITE.rglob('*')):

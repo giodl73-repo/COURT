@@ -34,10 +34,17 @@ Independent delivered-source replay (after clean packaging):
 python browser/inspector/verify-source.py --bindgen /absolute/path/to/wasm-bindgen
 ```
 
-It extracts the delivered ZIP outside Git, repeats five foundation and five
+It extracts the delivered ZIP outside Git, repeats seven foundation and five
 adapter native tests, builds native CLI/release WASM, requires identical inputs
 and serialized native responses, and runs fourteen rebuilt browser behavior
 checks including native/WASM equality. The two exact original-artifact delivery
 cases are deliberately separate; the full packaged site requires all sixteen.
 Original/rebuilt WASM hashes are recorded without claiming binary identity.
 The owned temporary extraction is removed after QA receipts are retained.
+
+The feature branch merges the two pre-existing PITFALL commits from TRACKER's
+canonical COURT snapshot `8c75bfb`. These add two readiness-boundary tests and
+compile-time policy fixtures; all seven foundation tests pass. Production code
+before `#[cfg(test)]` is byte-identical to public entry `9af0d6d`; full foundation
+source, manifests, lock and RUNE fixtures are now protected against `8c75bfb`.
+This retains existing work rather than dropping it during pointer advancement.
