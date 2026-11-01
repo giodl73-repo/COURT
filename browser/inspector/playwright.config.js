@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./tests',workers:1,retries:0,timeout:30000,use:{baseURL:'http://127.0.0.1:4191/COURT/inspector/'},reporter:[['list'],['json',{outputFile:'.cache/browser-results.json'}]],webServer:{command:'python -m http.server 4191 --directory ../../target/court-prototype',url:'http://127.0.0.1:4191/COURT/inspector/',reuseExistingServer:false}});

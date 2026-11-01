@@ -1,3 +1,8 @@
 /target/
 **/*.rs.bk
 
+
+/browser/inspector/target/
+/browser/inspector/node_modules/
+/browser/inspector/.cache/
+/browser/inspector/test-results/

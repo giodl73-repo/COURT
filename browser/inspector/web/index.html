@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COURT snapshot inspector prototype</title>
+<style>body{font:17px/1.5 system-ui;max-width:74rem;margin:auto;padding:1.5rem;color:#172b3a;background:#f3f5f2}h1{line-height:1.1}textarea{box-sizing:border-box;width:100%;height:24rem;font:14px/1.5 monospace}button,a{margin:.3rem}button{padding:.6rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:1rem}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #066e78}nav{display:flex;flex-wrap:wrap;gap:.5rem}</style>
+<h1>Inspect an experience snapshot</h1>
+<p>COURT Rust queries expose declared available commands, scene roles and unsupported-feature hints. This prototype inspects data; it does not execute actions or certify rendering, provenance or assessment success.</p>
+<nav><a href="https://github.com/giodl73-repo/COURT">Repository</a><a href="https://github.com/giodl73-repo/COURT/tree/main/crates/court-core/src">Native Rust source</a><a href="./pkg/court_inspector_bg.wasm" download>Compiled WASM</a></nav>
+<p>Adapter limits: 512 KiB UTF-8, 256 actions, 256 scene nodes. Coordinates/extents use signed 32-bit integers. Unknown JSON fields are rejected. Source references stay inert text.</p>
+<label for="input">Snapshot JSON</label><textarea id="input" spellcheck="false"></textarea>
+<div><button id="example">Load authored example</button><button id="inspect" disabled>Inspect snapshot</button><button id="restart">Restart engine</button><button id="download" disabled>Download report</button></div>
+<p id="status" role="status">Starting Rust engine…</p><pre id="report" tabindex="0" aria-label="Inspection report">No report yet.</pre>
+<script type="module" src="./app.js"></script></html>
