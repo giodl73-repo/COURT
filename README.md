@@ -14,9 +14,19 @@ See `docs\research\fontes-mit-game-courses.md` and the review specs in
 
 ## Rust/WASM snapshot inspector
 
-A [standalone browser workbench](browser/inspector/README.md) is in qualification.
-It runs the unchanged native snapshot queries on own JSON. Hosted checks, exact
-artifact custody and live verification remain required before a published release.
+[Open the snapshot inspector](https://giodl73-repo.github.io/COURT/inspector/)
+to inspect an authored example or your own JSON with the existing Rust core.
+It shows native player-available commands, scene roles and declared feature hints
+without executing actions. Original opened bytes, current text, an explicit LF
+copy and the full report have separate downloads. Source, compiled WASM,
+build provenance and license routes stay available independently of the worker.
+
+See the [workbench guide](browser/inspector/README.md),
+[qualification record](context/waves/2026-11-01-snapshot-inspector/RELEASE.md),
+and [delivery workflow](.github/workflows/pages.yml). Exact deployed source is
+identified by the site's provenance.json; a source ZIP is a separate download
+from the compiled WASM. Snapshot queries do not certify a renderer, product,
+source rights, playtest outcome or migration readiness.
 
 ## First command
 

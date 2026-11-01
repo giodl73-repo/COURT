@@ -1,0 +1,16 @@
+{
+  "racket_commit": "e2166f6f9f304fca953d4c9b8aaf0d478a52fe3e",
+  "court_native_baseline": "8c75bfbfc2ec349b0fdded9ea1575cbfce93886e",
+  "court_candidate": "0bfae0e8b89bd463d3803f4854139ca925b0989e",
+  "tests": {
+    "unit": 4,
+    "pitfall_closure": 1,
+    "proof_surface": 1
+  },
+  "resolved_dependency": "path override to the candidate court-core, confirmed by cargo metadata source=null and manifest path",
+  "command": "cargo +1.95.0 test -p racket-core (working directory is isolated RACKET checkout)",
+  "original_lock_and_canonical_checkouts_unchanged": true,
+  "owned_rehearsal_worktree_removed": true,
+  "log_sha256": "57c23ac3e168bb63373a69ebcbc61c9429f8a1e11e48a6b3db2a5c7a98712e91",
+  "initial_attempt": "First invocation from TRACKER used the locked Git dependency because Cargo did not read the isolated checkout config. That six-test run is retained separately and is not this patch rehearsal."
+}

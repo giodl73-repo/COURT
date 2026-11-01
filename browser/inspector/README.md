@@ -8,7 +8,7 @@ The standalone crate converts an explicitly labelled JSON DTO into native types;
 only unchanged COURT methods decide query results. Adapter observations about
 mismatched declarations/negative extents are not native validation errors.
 
-This is a prototype, **not a Pages release**. No actions run. No product rules,
+This browser preview exposes existing snapshot queries. No actions run. No product rules,
 renderer selection, RACKET diagnostics, source fetch, validation-packet checking,
 playtest inference, provenance verification or assessment success is provided.
 Source IDs and caller text are inert. Available destructive commands are native
@@ -59,10 +59,11 @@ The old failed reports remain in local QA receipts.
 Packaging now records complete Git source, compiled WASM, exact file inventory,
 24 Cargo package notices and Rust library notices separately from private QA.
 Candidate delivery checks require every served file to match its inventory and
-source/build/legal routes to work without WASM. This packaging is not yet a
-hosted release. Remaining gates: independent source replay, final resource/worker
-review, hosted CI and artifact custody, deployment of the tested artifact and
-fresh live file/browser verification. RACKET rehearsal becomes mandatory if any
+source/build/legal routes to work without WASM. Hosted candidate qualification includes all sixteen browser cases, independent
+source replay with fourteen behavior checks and 38 exact native/WASM responses,
+complete artifact verification and preserved source/legal routes. See the child
+wave release record for the dated candidate receipts. Default-branch delivery
+and fresh live verification remain separate from a passing PR build. RACKET rehearsal becomes mandatory if any
 foundation contract changes; this adapter leaves foundation sources unchanged.
 Do not publish the prototype staging tree.
 
