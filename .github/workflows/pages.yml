@@ -33,7 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          rustup toolchain install 1.95.0 --profile minimal --component clippy --component rust-docs --target wasm32-unknown-unknown
+          rustup toolchain install 1.95.0 --profile minimal --component clippy --component rustfmt --component rust-docs --target wasm32-unknown-unknown
           archive="wasm-bindgen-0.2.127-x86_64-unknown-linux-musl.tar.gz"
           install_dir="${RUNNER_TEMP}/wasm-bindgen-0.2.127"
           gh release download 0.2.127 --repo wasm-bindgen/wasm-bindgen --pattern "${archive}" --dir "${RUNNER_TEMP}"
@@ -44,6 +44,9 @@ jobs:
       - name: Protect foundation and qualify native/WASM
         run: |
           git diff --exit-code 8c75bfbfc2ec349b0fdded9ea1575cbfce93886e HEAD -- crates Cargo.toml Cargo.lock docs/rune
+          cargo +1.95.0 fmt --all -- --check
+          cargo +1.95.0 fmt --manifest-path browser/inspector/Cargo.toml -- --check
+          cargo +1.95.0 clippy --workspace --locked --all-targets -- -D warnings
           cargo +1.95.0 test --workspace --locked
           cargo +1.95.0 test --manifest-path browser/inspector/Cargo.toml --locked
           cargo +1.95.0 clippy --manifest-path browser/inspector/Cargo.toml --locked --all-targets -- -D warnings
