@@ -6,17 +6,15 @@ parser=argparse.ArgumentParser();parser.add_argument('--bindgen',required=True);
 site=ROOT/'target/court-release/COURT/inspector'
 cache=P/'.cache';cache.mkdir(exist_ok=True)
 original=json.loads((cache/'native-cases.json').read_text(encoding='utf-8'))
-work=ROOT/'target/source-replay';work.mkdir(parents=True,exist_ok=True)
-assert work.resolve().is_relative_to(ROOT.resolve()/'target')
 results=[]
 def run(command,cwd,env=None):
- result=subprocess.run(command,cwd=cwd,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
- with (cache/'source-replay.log').open('ab') as log:log.write(('\n$ '+' '.join(map(str,command))+'\n').encode());log.write(result.stdout)
+ result=subprocess.run(command,cwd=cwd,env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+ with (cache/'source-replay.log').open('ab') as log:log.write(('\n$ '+' '.join(map(str,command))+'\n').encode());log.write(result.stdout);log.write(result.stderr)
  if result.returncode:raise SystemExit('Source replay failed; see .cache/source-replay.log')
  return result.stdout
 (cache/'source-replay.log').write_bytes(b'')
-with tempfile.TemporaryDirectory(prefix='court replay-',dir=work) as temporary:
- base=pathlib.Path(temporary).resolve();assert base.is_relative_to(work.resolve())
+with tempfile.TemporaryDirectory(prefix='court source replay ') as temporary:
+ base=pathlib.Path(temporary).resolve();assert not base.is_relative_to(ROOT.resolve())
  with zipfile.ZipFile(site/'source.zip') as archive:
   for name in archive.namelist():
    relative=pathlib.PurePosixPath(name)
@@ -25,8 +23,15 @@ with tempfile.TemporaryDirectory(prefix='court replay-',dir=work) as temporary:
    destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(archive.read(name))
  source=base/'COURT-source';consumer=source/'browser/inspector'
  assert not (source/'.git').exists()
+ probe=subprocess.run(['git','rev-parse','--show-toplevel'],cwd=source,capture_output=True)
+ assert probe.returncode != 0, 'Delivered source must be outside every Git checkout'
  cargo=shutil.which('cargo');python=shutil.which('python');npm=shutil.which('npm')
  manifest='browser/inspector/Cargo.toml'
+ metadata=json.loads(run([cargo,'+1.95.0','metadata','--manifest-path',manifest,'--locked','--format-version','1'],source))
+ first_party=[p for p in metadata['packages'] if p['name'] in ['court-core','court-inspector']]
+ assert len(first_party)==2
+ for package in first_party:
+  assert pathlib.Path(package['manifest_path']).resolve().is_relative_to(source.resolve()),package['name']
  run([cargo,'+1.95.0','test','--workspace','--locked'],source)
  run([cargo,'+1.95.0','test','--manifest-path',manifest,'--locked'],source)
  run([cargo,'+1.95.0','build','--manifest-path',manifest,'--locked','--release','--target','wasm32-unknown-unknown','--lib'],source)
@@ -42,6 +47,6 @@ with tempfile.TemporaryDirectory(prefix='court replay-',dir=work) as temporary:
  assert browser['stats']['unexpected']==browser['stats']['skipped']==browser['stats']['flaky']==0
  shutil.copyfile(consumer/'.cache/browser-results.json',cache/'source-replay-browser.json')
  build=json.loads((consumer/'.cache/prototype-build.json').read_text(encoding='utf-8'))
- receipt={'outside_git':True,'foundation_tests':7,'adapter_tests':5,'browser_checks':browser['stats']['expected'],'identical_native_requests_and_responses':len(original),'rebuilt_wasm_sha256':build['wasm_sha256'],'original_wasm_sha256':json.loads((site/'provenance.json').read_text(encoding='utf-8'))['wasm_sha256'],'binary_identity_claimed':False}
+ receipt={'outside_git':True,'git_discovery_returncode':probe.returncode,'extraction_path_contains_spaces':' ' in str(base),'first_party_manifests_contained':True,'foundation_tests':7,'adapter_tests':6,'browser_checks':browser['stats']['expected'],'identical_native_requests_and_responses':len(original),'rebuilt_wasm_sha256':build['wasm_sha256'],'original_wasm_sha256':json.loads((site/'provenance.json').read_text(encoding='utf-8'))['wasm_sha256'],'binary_identity_claimed':False}
  (cache/'source-replay.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
  print(json.dumps(receipt))

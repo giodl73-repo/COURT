@@ -177,7 +177,7 @@ impl Input {
     }
 }
 
-fn evaluate(text: &str) -> Result<Value, String> {
+fn parse_input(text: &str) -> Result<Input, String> {
     if text.len() > MAX_BYTES {
         return Err(format!(
             "Input exceeds the adapter limit of {MAX_BYTES} UTF-8 bytes."
@@ -189,6 +189,19 @@ fn evaluate(text: &str) -> Result<Value, String> {
             "Adapter admits at most {MAX_ITEMS} actions and {MAX_ITEMS} scene nodes."
         ));
     }
+    Ok(input)
+}
+
+/// Decode the inspector JSON format into existing native contracts.
+/// Shares strict field, enum, byte and item admission with `inspect_snapshot`.
+/// Does not validate provenance, product readiness or renderer compatibility.
+/// Consumers own runtime/output limits. No actions execute.
+pub fn decode_snapshot(text: &str) -> Result<CourtSnapshot, String> {
+    parse_input(text).map(Input::into_snapshot)
+}
+
+fn evaluate(text: &str) -> Result<Value, String> {
+    let input = parse_input(text)?;
     // Preserve admitted fields in the report; provenance is caller supplied, never fetched.
     let admitted = serde_json::to_value(&input).map_err(|e| e.to_string())?;
     let snapshot = input.into_snapshot();
@@ -256,6 +269,41 @@ mod tests {
     const EXAMPLE: &str = include_str!("../fixtures/snapshot.json");
     fn report(text: &str) -> Value {
         serde_json::from_str(&inspect_snapshot(text)).unwrap()
+    }
+    #[test]
+    fn shared_decoder_preserves_fields_and_identical_admission_errors() {
+        let mut v: Value = serde_json::from_str(EXAMPLE).unwrap();
+        v["actions"][1] = v["actions"][0].clone();
+        v["scene"][0]["width"] = json!(-7);
+        let snapshot = decode_snapshot(&v.to_string()).unwrap();
+        assert_eq!(
+            snapshot.available_commands().collect::<Vec<_>>(),
+            vec!["inspect", "inspect", "reset"]
+        );
+        assert_eq!(snapshot.scene[0].width, -7);
+        assert!(snapshot.has_scene_role(CourtSceneRole::Surface));
+        assert!(snapshot.has_scene_role(CourtSceneRole::Control));
+        assert_eq!(
+            snapshot
+                .unsupported_scene_features()
+                .next()
+                .unwrap()
+                .fallback,
+            "Text label"
+        );
+        let mut unknown = v.clone();
+        unknown["scene"][0]["role"] = json!("Camera");
+        let mut excess = v;
+        excess["actions"] = json!(vec![excess["actions"][0].clone(); MAX_ITEMS + 1]);
+        for invalid in [
+            String::new(),
+            unknown.to_string(),
+            excess.to_string(),
+            " ".repeat(MAX_BYTES + 1),
+        ] {
+            let error = decode_snapshot(&invalid).unwrap_err();
+            assert_eq!(report(&invalid)["error"], error);
+        }
     }
     #[test]
     fn all_availability_states_use_native_order_and_semantics() {

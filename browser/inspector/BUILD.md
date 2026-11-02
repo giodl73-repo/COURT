@@ -34,7 +34,7 @@ Independent delivered-source replay (after clean packaging):
 python browser/inspector/verify-source.py --bindgen /absolute/path/to/wasm-bindgen
 ```
 
-It extracts the delivered ZIP outside Git, repeats seven foundation and five
+It extracts the delivered ZIP outside Git, repeats seven foundation and six
 adapter native tests, builds native CLI/release WASM, requires identical inputs
 and serialized native responses, and runs fourteen rebuilt browser behavior
 checks including native/WASM equality. The two exact original-artifact delivery
