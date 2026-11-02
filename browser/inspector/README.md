@@ -73,7 +73,7 @@ Independent delivered-source replay (after clean packaging):
 python browser/inspector/verify-source.py --bindgen /absolute/path/to/wasm-bindgen
 ```
 
-It extracts the delivered ZIP outside Git, repeats seven foundation and five
+It extracts the delivered ZIP outside Git, repeats seven foundation and six
 adapter native tests, builds native CLI/release WASM, requires identical inputs
 and serialized native responses, and runs fourteen rebuilt browser behavior
 checks including native/WASM equality. The two exact original-artifact delivery
@@ -93,3 +93,11 @@ roundtrip samples with user agent, hardware concurrency and input bytes, plus
 38 direct-WASM samples. These include browser/driver/serialization overhead;
 there is no comparative performance claim. The independent replay deliberately
 uses an extraction directory containing spaces to exercise portable build paths.
+
+## Shared native decoder
+
+`court_inspector::decode_snapshot(&str)` exposes the same strict admission and
+existing native `CourtSnapshot` mapping used by the inspector. RACKET can reuse
+this COURT-owned adapter without maintaining a second DTO. No core contract or
+runtime semantics change. Consumers own runtime/output limits. Source replay
+now requires failed Git discovery and contained first-party Cargo manifests.
